@@ -1,0 +1,139 @@
+@font-face {
+    font-family: OutfitBold;
+    src: url("/fuentes/outfit/Outfit-Bold.ttf");
+} 
+@font-face {
+    font-family: OutfitLight;
+    src: url("/fuentes/outfit/Outfit-Light.ttf");
+}
+
+body {
+    background-image: url("/imagenes/artistic-blurry-colorful-wallpaper-background.jpg");
+    margin: auto;
+}
+
+/* ------------------------------ Video ---------------------------------------------------------- */
+#div_video_fondo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}#div_video_fondo > #video_fondo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ------------------------------ Header ---------------------------------------------------------- */
+#div_header {
+    position: fixed;
+    display: flex;
+    text-align: center;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    height: 40px;
+    margin: auto;
+    background-color: rgba(255, 255, 255, .16);
+    backdrop-filter: blur(10px) saturate(1);
+    z-index: 2;
+    /* border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.1); */
+}
+#header {
+    display: grid;
+    grid: auto-flow/ 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    align-content: center;
+    color: #cd8ffd;
+} #header > #header_opcion_1 {
+    margin: 20px;
+    font-size: 15px;
+    font-family: OutfitBold;
+    transition:color .3s ease;
+} #header_opcion_1:hover {
+    color: white;
+} #header > #header_opcion_2 {
+    margin: 20px;
+    font-size: 15px;
+    font-family: OutfitBold;
+    transition:color .3s ease;
+} #header_opcion_2:hover {
+    color: white;
+} #header > #header_opcion_3 {
+    margin: 20px;
+    font-size: 15px;
+    font-family: OutfitBold;
+    transition:color .3s ease;
+} #header_opcion_3:hover {
+    color: white
+} #header > #header_opcion_4 {
+    margin: 20px;
+    font-size: 15px;
+    font-family: OutfitBold;
+    transition:color .3s ease;
+} #header_opcion_4:hover {
+    color: rgb(255, 255, 255);
+}
+/* ------------------------------ Titulo ---------------------------------------------------------- */
+#div_titulo {
+    z-index: 0;  
+    position: fixed;
+    top: 40px;
+    text-align: center;
+    margin-top: 200px;
+    margin-bottom: 200px;
+    width: 100%;
+    height: 80px;
+    font-family: "Outfitlight";
+    font-size: 30px;
+    color: rgb(225, 182, 234);
+} #div_titulo > #titulo {
+    z-index: 0;
+    font-family: "OutfitBold";
+    font-size: 60px;
+    margin: auto;
+} 
+/* ------------------------------ Main div ---------------------------------------------------------- */
+#main_div {
+    float: left;
+    padding: 0px;
+    width: 100%;
+    height: 600px;
+    margin-top: 600px;
+    background-color: rgba(33, 0, 55, 1);
+    z-index: 1;
+    position: relative;
+}
+/* ------------------------------ Div1 ---------------------------------------------------------- */
+#imagen {
+    float: right;
+    margin: 20px;
+    width: auto;
+    height: 450px;
+    z-index: 1;
+    background: #000;
+}
+#imagen > #imagen-gojo {
+    float: right;
+    width: auto;
+    margin: auto;
+    height: 450px;
+    z-index: 1;
+}
+
+/* #div2 {
+    z-index: 1;
+    float: left;
+    margin: 20px;
+    align-content: center;
+    justify-content: center;
+    color: white;
+    font: 1em sans-serif;
+} */
