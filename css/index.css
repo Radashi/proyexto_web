@@ -101,39 +101,25 @@ body {
     margin: auto;
 } 
 /* ------------------------------ Main div ---------------------------------------------------------- */
-#main_div {
+#div_one {
     float: left;
     padding: 0px;
-    width: 100%;
-    height: 600px;
+    width: 70%;
+    height: 800px;
     margin-top: 600px;
     background-color: rgba(33, 0, 55, 1);
     z-index: 1;
     position: relative;
+    grid: auto/flow 1fr 1fr 1fr;
+    display: grid;
 }
-/* ------------------------------ Div1 ---------------------------------------------------------- */
-#imagen {
-    float: right;
-    margin: 20px;
-    width: auto;
-    height: 450px;
-    z-index: 1;
-    background: #000;
-}
-#imagen > #imagen-gojo {
-    float: right;
-    width: auto;
-    margin: auto;
-    height: 450px;
-    z-index: 1;
-}
-
-/* #div2 {
-    z-index: 1;
+#div_two {
     float: left;
-    margin: 20px;
-    align-content: center;
-    justify-content: center;
-    color: white;
-    font: 1em sans-serif;
-} */
+    width: 30%;
+    height: auto;
+    margin-top: 600px;
+} #div_two > #gojo_imagen {
+    float: left;
+    width: 100%;
+    height: auto;
+}
