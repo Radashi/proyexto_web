@@ -48,10 +48,10 @@ body {
 }
 #header {
     display: grid;
-    grid: auto-flow/ 1fr 1fr 1fr 1fr;
+    grid: auto-flow/ 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     justify-content: center;
     align-content: center;
-    color: #cd8ffd;
+    color: #000000;
 } #header > #header_opcion_1 {
     margin: 20px;
     font-size: 15px;
@@ -80,6 +80,27 @@ body {
     transition:color .3s ease;
 } #header_opcion_4:hover {
     color: rgb(255, 255, 255);
+} #header > #header_opcion_5 {
+    margin: 20px;
+    font-size: 15px;
+    font-family: OutfitBold;
+    transition:color .3s ease;
+} #header_opcion_5:hover {
+    color: rgb(255, 255, 255);
+} #header > #header_opcion_6 {
+    margin: 20px;
+    font-size: 15px;
+    font-family: OutfitBold;
+    transition:color .3s ease;
+} #header_opcion_6:hover {
+    color: rgb(255, 255, 255);
+} #header > #header_opcion_7 {
+    margin: 20px;
+    font-size: 15px;
+    font-family: OutfitBold;
+    transition:color .3s ease;
+} #header_opcion_7:hover {
+    color: rgb(255, 255, 255);
 }
 /* ------------------------------ Titulo ---------------------------------------------------------- */
 #div_titulo {
@@ -93,7 +114,7 @@ body {
     height: 80px;
     font-family: "Outfitlight";
     font-size: 30px;
-    color: rgb(225, 182, 234);
+    color: rgb(255, 160, 160);
 } #div_titulo > #titulo {
     z-index: 0;
     font-family: "OutfitBold";
@@ -107,19 +128,21 @@ body {
     width: 70%;
     height: 800px;
     margin-top: 600px;
-    background-color: rgba(33, 0, 55, 1);
+    background-color: rgb(75, 6, 6);
     z-index: 1;
     position: relative;
-    grid: auto/flow 1fr 1fr 1fr;
-    display: grid;
 }
 #div_two {
     float: left;
+    position: relative;
+    z-index: 1;
     width: 30%;
     height: auto;
     margin-top: 600px;
 } #div_two > #gojo_imagen {
+    z-index: 1;
     float: left;
     width: 100%;
     height: auto;
+    
 }
