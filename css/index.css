@@ -125,24 +125,27 @@ body {
 #div_one {
     float: left;
     padding: 0px;
-    width: 70%;
+    width: 100%;
     height: 800px;
     margin-top: 600px;
-    background-color: rgb(75, 6, 6);
+    background-color: rgb(156, 96, 96);
     z-index: 1;
     position: relative;
-}
-#div_two {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px; 
+} #div_one > #div_1 {
     float: left;
-    position: relative;
-    z-index: 1;
-    width: 30%;
-    height: auto;
-    margin-top: 600px;
-} #div_two > #gojo_imagen {
-    z-index: 1;
+    background-color: #8b0000;
+    grid-area: 1 / 1 / 4 / 4;
+} #div_one > #div_2 {
     float: left;
-    width: 100%;
-    height: auto;
-    
+    grid-area: 1 / 4 / 4 / 6;
+    background-color: #d80000;
+} #div_one > #div_3 {
+    float: left;
+    background-color: #ff0000;
+    grid-area: 4 / 1 / 6 / 6;
 }
