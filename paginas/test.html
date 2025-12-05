@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Test Tifosi - Scuderia Ferrari</title>
+    <link rel="stylesheet" href="../css/estilos_proyecto.css">
+    <script src="../javascript/actions.js" defer></script>
+</head>
+
+<body id="body_test">
+   <div id="div_header">
+        <div id="linea_header"></div>
+        <header id="header">
+            <nav id="header_opcion_1"><a href="../index.html">Inicio</a></nav>
+            <nav id="header_opcion_2"><a href="historia.html">Historia</a></nav>
+            <nav id="header_opcion_3"><a href="monoplazas.html">Monoplazas</a></nav>
+            <nav id="header_opcion_4"><a href="pilotos.html">Pilotos</a></nav>
+            <nav id="header_opcion_6"><a href="fans.html">Fans</a></nav>
+            <nav id="header_opcion_5"><a href="galeria.html">Galeria</a></nav>
+            <nav id="header_opcion_7"><a href="test.html">Test</a></nav>
+            <nav id="header_opcion_8"><a href="contacto.html">Contacto</a></nav>
+        </header>
+    </div>
+
+    <div class="quiz-container">
+        
+        <div id="pantalla-inicio" class="seccion-quiz">
+            <h1>¿Eres un verdadero Tifosi?</h1>
+            <p>Demuestra cuánto sabes sobre la escudería más grande de la historia.</p>
+            <img src="../imagenes/ferrari-logo.png" alt="Logo Quiz" class="logo-quiz">
+            <button id="btn-comenzar" class="btn-rojo">Iniciar Test</button>
+        </div>
+
+        <div id="pantalla-juego" class="seccion-quiz oculto">
+            <div class="barra-progreso">
+                <div id="progreso-relleno"></div>
+            </div>
+            <h2 id="pregunta-texto">Aquí va la pregunta...</h2>
+            <div id="contenedor-opciones" class="grid-opciones">
+                </div>
+            <button id="btn-siguiente" class="btn-siguiente oculto">Siguiente</button>
+        </div>
+
+        <div id="pantalla-final" class="seccion-quiz oculto">
+            <h2>Resultados</h2>
+            <p>Tu puntuación final es:</p>
+            <h1 id="puntaje-final">0 / 5</h1>
+            <p id="mensaje-final">Mensaje de resultado</p>
+            <button id="btn-reiniciar" class="btn-rojo">Intentar de nuevo</button>
+        </div>
+
+    </div>
+
+    <footer id="footer_test">
+        <p>© 2025 Escuderia Ferrari. Todos los derechos reservados

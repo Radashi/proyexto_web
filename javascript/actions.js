@@ -1,278 +1,196 @@
-/* LINEA DEL TIEMPO */
-jQuery(document).ready(function($){
-	var timelines = $('.cd-horizontal-timeline'),
-		eventsMinDistance = 60;
+/* ================== CÓDIGO PARA EL TEST =========================== */
 
-	(timelines.length > 0) && initTimeline(timelines);
+document.addEventListener('DOMContentLoaded', () => {
+    
+    const pantallaInicio = document.getElementById('pantalla-inicio');
+    
+    if (!pantallaInicio) return; 
 
-	function initTimeline(timelines) {
-		timelines.each(function(){
-			var timeline = $(this),
-				timelineComponents = {};
-			//cache timeline components 
-			timelineComponents['timelineWrapper'] = timeline.find('.events-wrapper');
-			timelineComponents['eventsWrapper'] = timelineComponents['timelineWrapper'].children('.events');
-			timelineComponents['fillingLine'] = timelineComponents['eventsWrapper'].children('.filling-line');
-			timelineComponents['timelineEvents'] = timelineComponents['eventsWrapper'].find('a');
-			timelineComponents['timelineDates'] = parseDate(timelineComponents['timelineEvents']);
-			timelineComponents['eventsMinLapse'] = minLapse(timelineComponents['timelineDates']);
-			timelineComponents['timelineNavigation'] = timeline.find('.cd-timeline-navigation');
-			timelineComponents['eventsContent'] = timeline.children('.events-content');
-
-			//assign a left postion to the single events along the timeline
-			setDatePosition(timelineComponents, eventsMinDistance);
-			//assign a width to the timeline
-			var timelineTotWidth = setTimelineWidth(timelineComponents, eventsMinDistance);
-			//the timeline has been initialize - show it
-			timeline.addClass('loaded');
-
-			//detect click on the next arrow
-			timelineComponents['timelineNavigation'].on('click', '.next', function(event){
-				event.preventDefault();
-				updateSlide(timelineComponents, timelineTotWidth, 'next');
-			});
-			//detect click on the prev arrow
-			timelineComponents['timelineNavigation'].on('click', '.prev', function(event){
-				event.preventDefault();
-				updateSlide(timelineComponents, timelineTotWidth, 'prev');
-			});
-			//detect click on the a single event - show new event content
-			timelineComponents['eventsWrapper'].on('click', 'a', function(event){
-				event.preventDefault();
-				timelineComponents['timelineEvents'].removeClass('selected');
-				$(this).addClass('selected');
-				updateOlderEvents($(this));
-				updateFilling($(this), timelineComponents['fillingLine'], timelineTotWidth);
-				updateVisibleContent($(this), timelineComponents['eventsContent']);
-			});
-
-			//on swipe, show next/prev event content
-			timelineComponents['eventsContent'].on('swipeleft', function(){
-				var mq = checkMQ();
-				( mq == 'mobile' ) && showNewContent(timelineComponents, timelineTotWidth, 'next');
-			});
-			timelineComponents['eventsContent'].on('swiperight', function(){
-				var mq = checkMQ();
-				( mq == 'mobile' ) && showNewContent(timelineComponents, timelineTotWidth, 'prev');
-			});
-
-			//keyboard navigation
-			$(document).keyup(function(event){
-				if(event.which=='37' && elementInViewport(timeline.get(0)) ) {
-					showNewContent(timelineComponents, timelineTotWidth, 'prev');
-				} else if( event.which=='39' && elementInViewport(timeline.get(0))) {
-					showNewContent(timelineComponents, timelineTotWidth, 'next');
-				}
-			});
-		});
-	}
-
-	function updateSlide(timelineComponents, timelineTotWidth, string) {
-		//retrieve translateX value of timelineComponents['eventsWrapper']
-		var translateValue = getTranslateValue(timelineComponents['eventsWrapper']),
-			wrapperWidth = Number(timelineComponents['timelineWrapper'].css('width').replace('px', ''));
-		//translate the timeline to the left('next')/right('prev') 
-		(string == 'next') 
-			? translateTimeline(timelineComponents, translateValue - wrapperWidth + eventsMinDistance, wrapperWidth - timelineTotWidth)
-			: translateTimeline(timelineComponents, translateValue + wrapperWidth - eventsMinDistance);
-	}
-
-	function showNewContent(timelineComponents, timelineTotWidth, string) {
-		//go from one event to the next/previous one
-		var visibleContent =  timelineComponents['eventsContent'].find('.selected'),
-			newContent = ( string == 'next' ) ? visibleContent.next() : visibleContent.prev();
-
-		if ( newContent.length > 0 ) { //if there's a next/prev event - show it
-			var selectedDate = timelineComponents['eventsWrapper'].find('.selected'),
-				newEvent = ( string == 'next' ) ? selectedDate.parent('li').next('li').children('a') : selectedDate.parent('li').prev('li').children('a');
-			
-			updateFilling(newEvent, timelineComponents['fillingLine'], timelineTotWidth);
-			updateVisibleContent(newEvent, timelineComponents['eventsContent']);
-			newEvent.addClass('selected');
-			selectedDate.removeClass('selected');
-			updateOlderEvents(newEvent);
-			updateTimelinePosition(string, newEvent, timelineComponents, timelineTotWidth);
-		}
-	}
-
-	function updateTimelinePosition(string, event, timelineComponents, timelineTotWidth) {
-		//translate timeline to the left/right according to the position of the selected event
-		var eventStyle = window.getComputedStyle(event.get(0), null),
-			eventLeft = Number(eventStyle.getPropertyValue("left").replace('px', '')),
-			timelineWidth = Number(timelineComponents['timelineWrapper'].css('width').replace('px', '')),
-			timelineTotWidth = Number(timelineComponents['eventsWrapper'].css('width').replace('px', ''));
-		var timelineTranslate = getTranslateValue(timelineComponents['eventsWrapper']);
-
-        if( (string == 'next' && eventLeft > timelineWidth - timelineTranslate) || (string == 'prev' && eventLeft < - timelineTranslate) ) {
-        	translateTimeline(timelineComponents, - eventLeft + timelineWidth/2, timelineWidth - timelineTotWidth);
+    const preguntas = [
+        {
+            pregunta: "¿Quién es el fundador de la escudería?",
+            opciones: ["Enzo Ferrari", "Dino Ferrari", "Piero Ferrari", "Luigi Ferrari"],
+            correcta: 0 // La posición 0 es "Enzo Ferrari"
+        },
+        {
+            pregunta: "¿En qué año ganó Kimi Räikkönen su campeonato?",
+            opciones: ["2005", "2008", "2007", "2010"],
+            correcta: 2 // 2007
+        },
+        {
+            pregunta: "¿Cuál es el apodo de los fans de Ferrari?",
+            opciones: ["Ferraristas", "Tifosi", "Rossos", "Cavallinos"],
+            correcta: 1 // Tifosi
+        },
+        {
+            pregunta: "¿Qué piloto tiene más títulos con Ferrari?",
+            opciones: ["Niki Lauda", "Juan M. Fangio", "Sebastian Vettel", "Michael Schumacher"],
+            correcta: 3 // Schumacher
+        },
+        {
+            pregunta: "¿Cómo se llama el circuito propiedad de Ferrari?",
+            opciones: ["Monza", "Imola", "Fiorano", "Mugello"],
+            correcta: 2 // Fiorano
         }
-	}
+    ];
+    let preguntaActual = 0;
+    let puntaje = 0;
 
-	function translateTimeline(timelineComponents, value, totWidth) {
-		var eventsWrapper = timelineComponents['eventsWrapper'].get(0);
-		value = (value > 0) ? 0 : value; //only negative translate value
-		value = ( !(typeof totWidth === 'undefined') &&  value < totWidth ) ? totWidth : value; //do not translate more than timeline width
-		setTransformValue(eventsWrapper, 'translateX', value+'px');
-		//update navigation arrows visibility
-		(value == 0 ) ? timelineComponents['timelineNavigation'].find('.prev').addClass('inactive') : timelineComponents['timelineNavigation'].find('.prev').removeClass('inactive');
-		(value == totWidth ) ? timelineComponents['timelineNavigation'].find('.next').addClass('inactive') : timelineComponents['timelineNavigation'].find('.next').removeClass('inactive');
-	}
+    const pantallaJuego = document.getElementById('pantalla-juego');
+    const pantallaFinal = document.getElementById('pantalla-final');
+    const btnComenzar = document.getElementById('btn-comenzar');
+    const btnSiguiente = document.getElementById('btn-siguiente');
+    const btnReiniciar = document.getElementById('btn-reiniciar');
+    
+    const textoPregunta = document.getElementById('pregunta-texto');
+    const contenedorOpciones = document.getElementById('contenedor-opciones');
+    const barraProgreso = document.getElementById('progreso-relleno');
 
-	function updateFilling(selectedEvent, filling, totWidth) {
-		//change .filling-line length according to the selected event
-		var eventStyle = window.getComputedStyle(selectedEvent.get(0), null),
-			eventLeft = eventStyle.getPropertyValue("left"),
-			eventWidth = eventStyle.getPropertyValue("width");
-		eventLeft = Number(eventLeft.replace('px', '')) + Number(eventWidth.replace('px', ''))/2;
-		var scaleValue = eventLeft/totWidth;
-		setTransformValue(filling.get(0), 'scaleX', scaleValue);
-	}
+    btnComenzar.addEventListener('click', () => {
+        pantallaInicio.classList.add('oculto');
+        pantallaJuego.classList.remove('oculto');
+        mostrarPregunta();
+    });
 
-	function setDatePosition(timelineComponents, min) {
-		for (i = 0; i < timelineComponents['timelineDates'].length; i++) { 
-		    var distance = daydiff(timelineComponents['timelineDates'][0], timelineComponents['timelineDates'][i]),
-		    	distanceNorm = Math.round(distance/timelineComponents['eventsMinLapse']) + 2;
-		    timelineComponents['timelineEvents'].eq(i).css('left', distanceNorm*min+'px');
-		}
-	}
+    function mostrarPregunta() {
+        resetearEstado();
+        let actual = preguntas[preguntaActual];
+        textoPregunta.innerText = actual.pregunta;
 
-	function setTimelineWidth(timelineComponents, width) {
-		var timeSpan = daydiff(timelineComponents['timelineDates'][0], timelineComponents['timelineDates'][timelineComponents['timelineDates'].length-1]),
-			timeSpanNorm = timeSpan/timelineComponents['eventsMinLapse'],
-			timeSpanNorm = Math.round(timeSpanNorm) + 4,
-			totalWidth = timeSpanNorm*width;
-		timelineComponents['eventsWrapper'].css('width', totalWidth+'px');
-		updateFilling(timelineComponents['timelineEvents'].eq(0), timelineComponents['fillingLine'], totalWidth);
-	
-		return totalWidth;
-	}
+        actual.opciones.forEach((opcion, index) => {
+            const boton = document.createElement('button');
+            boton.innerText = opcion;
+            boton.classList.add('btn-opcion');
+            if (index === actual.correcta) {
+                boton.dataset.esCorrecto = true;
+            }
+            boton.addEventListener('click', seleccionarRespuesta);
+            contenedorOpciones.appendChild(boton);
+        });
 
-	function updateVisibleContent(event, eventsContent) {
-		var eventDate = event.data('date'),
-			visibleContent = eventsContent.find('.selected'),
-			selectedContent = eventsContent.find('[data-date="'+ eventDate +'"]'),
-			selectedContentHeight = selectedContent.height();
+        let porcentaje = ((preguntaActual) / preguntas.length) * 100;
+        barraProgreso.style.width = porcentaje + "%";
+    }
 
-		if (selectedContent.index() > visibleContent.index()) {
-			var classEnetering = 'selected enter-right',
-				classLeaving = 'leave-left';
-		} else {
-			var classEnetering = 'selected enter-left',
-				classLeaving = 'leave-right';
-		}
+    function resetearEstado() {
+        btnSiguiente.classList.add('oculto');
+        while (contenedorOpciones.firstChild) {
+            contenedorOpciones.removeChild(contenedorOpciones.firstChild);
+        }
+    }
 
-		selectedContent.attr('class', classEnetering);
-		visibleContent.attr('class', classLeaving).one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(){
-			visibleContent.removeClass('leave-right leave-left');
-			selectedContent.removeClass('enter-left enter-right');
-		});
-		eventsContent.css('height', selectedContentHeight+'px');
-	}
+    function seleccionarRespuesta(e) {
+        const botonSeleccionado = e.target;
+        const esCorrecto = botonSeleccionado.dataset.esCorrecto === "true";
 
-	function updateOlderEvents(event) {
-		event.parent('li').prevAll('li').children('a').addClass('older-event').end().end().nextAll('li').children('a').removeClass('older-event');
-	}
-
-	function getTranslateValue(timeline) {
-		var timelineStyle = window.getComputedStyle(timeline.get(0), null),
-			timelineTranslate = timelineStyle.getPropertyValue("-webkit-transform") ||
-         		timelineStyle.getPropertyValue("-moz-transform") ||
-         		timelineStyle.getPropertyValue("-ms-transform") ||
-         		timelineStyle.getPropertyValue("-o-transform") ||
-         		timelineStyle.getPropertyValue("transform");
-
-        if( timelineTranslate.indexOf('(') >=0 ) {
-        	var timelineTranslate = timelineTranslate.split('(')[1];
-    		timelineTranslate = timelineTranslate.split(')')[0];
-    		timelineTranslate = timelineTranslate.split(',');
-    		var translateValue = timelineTranslate[4];
+        if (esCorrecto) {
+            botonSeleccionado.classList.add('correcto');
+            puntaje++;
         } else {
-        	var translateValue = 0;
+            botonSeleccionado.classList.add('incorrecto');
         }
 
-        return Number(translateValue);
-	}
+        Array.from(contenedorOpciones.children).forEach(boton => {
+            if (boton.dataset.esCorrecto === "true") {
+                boton.classList.add('correcto');
+            }
+            boton.disabled = true; 
+        });
+        btnSiguiente.classList.remove('oculto');
+    }
 
-	function setTransformValue(element, property, value) {
-		element.style["-webkit-transform"] = property+"("+value+")";
-		element.style["-moz-transform"] = property+"("+value+")";
-		element.style["-ms-transform"] = property+"("+value+")";
-		element.style["-o-transform"] = property+"("+value+")";
-		element.style["transform"] = property+"("+value+")";
-	}
+    btnSiguiente.addEventListener('click', () => {
+        preguntaActual++;
+        if (preguntaActual < preguntas.length) {
+            mostrarPregunta();
+        } else {
+            mostrarResultados();
+        }
+    });
 
-	//based on http://stackoverflow.com/questions/542938/how-do-i-get-the-number-of-days-between-two-dates-in-javascript
-	function parseDate(events) {
-		var dateArrays = [];
-		events.each(function(){
-			var dateComp = $(this).data('date').split('/'),
-				newDate = new Date(dateComp[2], dateComp[1]-1, dateComp[0]);
-			dateArrays.push(newDate);
-		});
-	    return dateArrays;
-	}
+    function mostrarResultados() {
+        pantallaJuego.classList.add('oculto');
+        pantallaFinal.classList.remove('oculto');
+        
+        document.getElementById('puntaje-final').innerText = puntaje + " / " + preguntas.length;
+        
+        const mensaje = document.getElementById('mensaje-final');
+        if (puntaje === 5) {
+            mensaje.innerText = "¡Increíble! Eres un verdadero Tifosi de corazón.";
+        } else if (puntaje >= 3) {
+            mensaje.innerText = "¡Muy bien! Sabes bastante sobre Ferrari.";
+        } else {
+            mensaje.innerText = "Te falta un poco de historia.";
+        }
+    }
 
-	function parseDate2(events) {
-		var dateArrays = [];
-		events.each(function(){
-			var singleDate = $(this),
-				dateComp = singleDate.data('date').split('T');
-			if( dateComp.length > 1 ) { //both DD/MM/YEAR and time are provided
-				var dayComp = dateComp[0].split('/'),
-					timeComp = dateComp[1].split(':');
-			} else if( dateComp[0].indexOf(':') >=0 ) { //only time is provide
-				var dayComp = ["2000", "0", "0"],
-					timeComp = dateComp[0].split(':');
-			} else { //only DD/MM/YEAR
-				var dayComp = dateComp[0].split('/'),
-					timeComp = ["0", "0"];
-			}
-			var	newDate = new Date(dayComp[2], dayComp[1]-1, dayComp[0], timeComp[0], timeComp[1]);
-			dateArrays.push(newDate);
-		});
-	    return dateArrays;
-	}
+    btnReiniciar.addEventListener('click', () => {
+        puntaje = 0;
+        preguntaActual = 0;
+        pantallaFinal.classList.add('oculto');
+        pantallaInicio.classList.remove('oculto');
+    });
 
-	function daydiff(first, second) {
-	    return Math.round((second-first));
-	}
+});
 
-	function minLapse(dates) {
-		//determine the minimum distance among events
-		var dateDistances = [];
-		for (i = 1; i < dates.length; i++) { 
-		    var distance = daydiff(dates[i-1], dates[i]);
-		    dateDistances.push(distance);
-		}
-		return Math.min.apply(null, dateDistances);
-	}
+/* ===================== formulario ========================================== */
+document.addEventListener('DOMContentLoaded', () => {
+    
+    const formFans = document.getElementById('form-fans');
 
-	/*
-		How to tell if a DOM element is visible in the current viewport?
-		http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
-	*/
-	function elementInViewport(el) {
-		var top = el.offsetTop;
-		var left = el.offsetLeft;
-		var width = el.offsetWidth;
-		var height = el.offsetHeight;
+    if (formFans) {
+        
+        formFans.addEventListener('submit', function(evento) {
+            evento.preventDefault();
+            
+            const nombre = document.getElementById('nombre');
+            const email = document.getElementById('email');
+            const edad = document.getElementById('edad');
+            const pais = document.getElementById('pais');
+            const terminos = document.getElementById('terminos');
 
-		while(el.offsetParent) {
-		    el = el.offsetParent;
-		    top += el.offsetTop;
-		    left += el.offsetLeft;
-		}
+            if (nombre.value.trim() === "") {
+                alert("El campo Nombre no puede estar vacío.");
+                nombre.focus();
+                return;
+            }
+            if (!isNaN(nombre.value)) {
+                alert("El nombre no puede ser un número. Por favor escribe un nombre real.");
+                nombre.value = ""; 
+                nombre.focus();
+                return;
+            }
 
-		return (
-		    top < (window.pageYOffset + window.innerHeight) &&
-		    left < (window.pageXOffset + window.innerWidth) &&
-		    (top + height) > window.pageYOffset &&
-		    (left + width) > window.pageXOffset
-		);
-	}
+            const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!regexEmail.test(email.value)) {
+                alert("Por favor ingresa un correo electrónico válido.");
+                email.focus();
+                return;
+            }
 
-	function checkMQ() {
-		//check if mobile or desktop device
-		return window.getComputedStyle(document.querySelector('.cd-horizontal-timeline'), '::before').getPropertyValue('content').replace(/'/g, "").replace(/"/g, "");
-	}
+            if (edad.value === "" || parseInt(edad.value) < 10) {
+                alert("Debes ingresar una edad válida (mínimo 10 años).");
+                edad.focus();
+                return;
+            }
+
+            if (pais.value === "") {
+                alert("Debes seleccionar un país de la lista.");
+                pais.focus();
+                return;
+            }
+
+            if (!terminos.checked) {
+                alert("Es obligatorio aceptar los términos y condiciones para unirte al club.");
+                return;
+            }
+
+            alert("Bienvenido a la Scuderia Ferrari Club. Tu registro ha sido enviado.");
+            
+            formFans.reset();
+            
+            const mensajeExito = document.getElementById('mensaje-exito');
+            if(mensajeExito) mensajeExito.classList.remove('oculto');
+        });
+    }
 });
