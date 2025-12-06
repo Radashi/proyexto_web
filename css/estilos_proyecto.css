@@ -1,5 +1,4 @@
 /* ================= FUENTES ================= */
-/* IMPORTANTE: Usamos "../" para salir de la carpeta CSS y entrar a Fuentes */
 @font-face {
     font-family: OutfitBold;
     src: url("../fuentes/outfit/Outfit-Bold.ttf");
@@ -12,27 +11,30 @@
 
 /* ================= GLOBALES ================= */
 * {
-    box-sizing: border-box; /* Esto evita que los paddings rompan el ancho */
+    box-sizing: border-box;
 }
 
 body {
     margin: 0;
     padding: 0;
-    font-family: OutfitLight, sans-serif; /* Fuente por defecto */
+    font-family: OutfitLight, sans-serif;
 }
 
 a {
     text-decoration: none;
     color: inherit;
-    display: block; /* Para que el click funcione en todo el botón */
+    display: block;
 }
 
 audio {
     display: block;
     margin: auto;
 }
+html {
+    scroll-behavior: smooth;
+}
 
-/* ================= HEADER & NAV (Optimizado) ================= */
+/* ================= HEADER & NAV ================= */
 #div_header {
     position: fixed;
     display: flex;
@@ -40,7 +42,7 @@ audio {
     width: 100%;
     top: 0;
     height: 40px;
-    z-index: 1000; /* Z-index alto para que siempre esté encima */
+    z-index: 1000;
 }
 
 #linea_header {
@@ -58,7 +60,7 @@ audio {
     grid-template-columns: repeat(8, 1fr); 
     align-items: center;
     justify-items: center;
-    width: 90%; /* Ancho controlado */
+    width: 90%; 
     max-width: 1200px;
     height: 35px;
     background: white;
@@ -73,15 +75,14 @@ audio {
     border-radius: 20px;
     transition: all 0.3s ease;
     cursor: pointer;
-    width: 90%; /* Para que no se peguen */
+    width: 90%; 
     text-align: center;
 }
 
-/* Efecto Hover unificado */
 #header > nav:hover {
     background: rgb(255, 0, 0);
     color: white;
-    transform: scale(1.05); /* Pequeño efecto de zoom */
+    transform: scale(1.05); 
 }
 
 /* ================= SECCIÓN TITULO (Parallax) ================= */
@@ -195,7 +196,6 @@ audio {
     outline: none;
 }
 
-/* Personalización del reproductor (Chrome/Edge) */
 #audio_motor_f1::-webkit-media-controls-panel {
     background-color: #222; 
 }
@@ -452,7 +452,6 @@ audio {
 }
 /* ################################################ MONOPLAZAS ################################################# */
 
-/* Fondo específico para esta página */
 #body_monoplazas {
     background-color: #f4f4f4; 
     margin: 0;
@@ -481,12 +480,10 @@ audio {
     font-size: 18px;
     margin-top: 10px;
 }
-
-/* --- GRID (La Cuadrícula) --- */
 .grid-monoplazas {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 30px; /* Espacio entre tarjetas */
+    gap: 30px; 
     max-width: 1200px;
     margin: 50px auto;
     padding: 0 20px;
@@ -496,20 +493,20 @@ audio {
 .tarjeta-auto {
     background: white;
     border-radius: 20px;
-    overflow: hidden; /* Para que la imagen no se salga de las esquinas redondas */
+    overflow: hidden; 
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid #e0e0e0;
 }
 
-/* Efecto al pasar el mouse por encima */
+
 .tarjeta-auto:hover {
-    transform: translateY(-10px); /* El auto "flota" hacia arriba */
-    box-shadow: 0 15px 30px rgba(255, 0, 0, 0.2); /* Sombra roja sutil */
+    transform: translateY(-10px); 
+    box-shadow: 0 15px 30px rgba(255, 0, 0, 0.2); 
     border-color: red;
 }
 
-/* Imagen dentro de la tarjeta */
+
 .imagen-auto {
     width: 100%;
     height: 200px;
@@ -519,10 +516,10 @@ audio {
 .imagen-auto img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Recorta la imagen para llenar el espacio sin deformarse */
+    object-fit: cover; 
 }
 
-/* Información del auto */
+
 .info-auto {
     padding: 20px;
     text-align: center;
@@ -542,7 +539,7 @@ audio {
     text-align: justify;
 }
 
-/* Lista de estadísticas */
+
 .stats-auto {
     list-style: none;
     padding: 0;
@@ -558,7 +555,7 @@ audio {
     color: #000;
 }
 
-/* Footer específico para monoplazas (o usa el genérico) */
+
 #footer_monoplazas {
     background-color: #cc0000;
     color: white;
@@ -591,7 +588,6 @@ audio {
     margin: 0 auto;
 }
 
-/* Diseño de la Tarjeta del Piloto */
 .card-piloto {
     position: relative; 
     background: linear-gradient(145deg, #cc0000, #990000);
@@ -618,7 +614,7 @@ audio {
     pointer-events: none;
 }
 
-/* Imagen del piloto */
+
 .imagen-piloto {
     width: 100%;
     height: 350px;
@@ -631,8 +627,8 @@ audio {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top center; /* Enfocar la cara */
-    mask-image: linear-gradient(to bottom, black 80%, transparent 100%); /* Desvanecido abajo */
+    object-position: top center; 
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%); 
     -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
 }
 
@@ -791,16 +787,16 @@ audio {
 }
 
 .item-galeria img {
-    width: 100%; /* La imagen se estira al ancho de su columna */
-    display: block; /* Elimina un pequeño espacio blanco extraño debajo de las imagenes */
+    width: 100%; 
+    display: block; 
     border-radius: 15px;
 }
 
 /* --- EFECTO HOVER (Texto que aparece encima) --- */
 .item-galeria:hover {
-    transform: scale(1.03); /* Pequeño zoom al pasar el mouse */
+    transform: scale(1.03); 
     z-index: 2;
-    box-shadow: 0 10px 20px rgba(255, 0, 0, 0.4); /* Resplandor rojo */
+    box-shadow: 0 10px 20px rgba(255, 0, 0, 0.4);
 }
 
 .capa-hover {
@@ -809,17 +805,17 @@ audio {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to top, rgba(204, 0, 0, 0.8), transparent); /* Degradado rojo */
-    opacity: 0; /* Invisible por defecto */
+    background: linear-gradient(to top, rgba(204, 0, 0, 0.8), transparent); 
+    opacity: 0; 
     transition: opacity 0.3s ease;
     display: flex;
-    align-items: flex-end; /* Texto abajo */
+    align-items: flex-end;
     justify-content: center;
     padding-bottom: 20px;
 }
 
 .item-galeria:hover .capa-hover {
-    opacity: 1; /* Visible al pasar el mouse */
+    opacity: 1; 
 }
 
 .capa-hover p {
@@ -830,16 +826,15 @@ audio {
     text-shadow: 1px 1px 5px black;
 }
 
-/* --- RESPONSIVE (Para celulares) --- */
 @media screen and (max-width: 900px) {
     .galeria-masonry {
-        column-count: 2; /* 2 columnas en tablets */
+        column-count: 2;
     }
 }
 
 @media screen and (max-width: 600px) {
     .galeria-masonry {
-        column-count: 1; /* 1 columna en celulares */
+        column-count: 1; 
         padding: 20px;
     }
 }
@@ -1086,4 +1081,125 @@ audio {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* ################################################ CALENDARIO ################################################# */
+
+#body_calendario {
+    background-color: #f4f4f4;
+    font-family: 'OutfitLight', sans-serif;
+}
+
+#footer_calendario {
+    background-color: #cc0000;
+    color: rgb(255, 255, 255);
+    padding: 20px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.contenedor-calendario {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-top: 5px solid #cc0000;
+}
+
+/* --- ESTILOS DE LA TABLA --- */
+.tabla-carreras {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.tabla-carreras thead tr {
+    background-color: #cc0000;
+    color: white;
+    text-align: left;
+    font-family: 'OutfitBold';
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.tabla-carreras th, 
+.tabla-carreras td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+
+.dato-centro {
+    text-align: center;
+    font-weight: bold;
+    color: #cc0000;
+}
+
+.tabla-carreras tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+}
+
+.tabla-carreras tbody tr:hover {
+    background-color: #fff0f0;
+   transform: scale(1.01);
+   transition: all 0.2s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    -webkit-transform: scale(1.01);
+    -moz-transform: scale(1.01);
+    -ms-transform: scale(1.01);
+    -o-transform: scale(1.01);
+}
+
+.fila-destacada {
+    background-color: #fff8e1 !important; /* Un amarillo suave */
+    border-left: 5px solid #ffcc00;
+}
+
+.pais {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.etiqueta {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.finalizado {
+    background-color: #e0e0e0;
+    color: #777;
+}
+
+.proximo {
+    background-color: #d4edda;
+    color: #155724; 
+    border: 1px solid #c3e6cb;
+}
+
+.pendiente {
+    background-color: #fff3cd;
+    color: #856404; 
+}
+
+.importante {
+    background-color: #cc0000;
+    color: white;
+    box-shadow: 0 2px 5px rgba(204, 0, 0, 0.4);
+}
+
+@media (max-width: 600px) {
+    .tabla-carreras th:nth-child(3),
+    .tabla-carreras td:nth-child(3) {
+        display: none;
+    }
+    
+    .contenedor-calendario {
+        padding: 10px;
+        width: 95%;
+    }
 }
